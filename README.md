@@ -1,4 +1,4 @@
-# Docker Hyperapp
+# Hyperapp on Docker
 
 ## Start
 
