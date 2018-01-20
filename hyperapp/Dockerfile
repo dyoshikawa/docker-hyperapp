@@ -1,0 +1,38 @@
+FROM node:alpine
+
+RUN apk --update add bash nginx
+
+RUN sed -i 's/user\ \ nginx\;/user\ \ 1000\;/g' /etc/nginx/nginx.conf \
+ && mkdir /run/nginx
+ADD server.conf /etc/nginx/conf.d/default.conf
+
+RUN mkdir -p /var/www/happ-pre
+WORKDIR /var/www/happ-pre
+
+RUN mkdir -p src/js \
+ && mkdir src/js/components \
+ && mkdir src/scss \
+ && mkdir dist
+
+RUN npm init -y \
+ && npm install --save-dev webpack babel-cli babel-preset-env babel-loader node-sass \
+ && npm install --save hyperapp bootstrap-sass
+
+ADD package.json package.json
+ADD .babelrc .babelrc
+ADD webpack.config.js webpack.config.js
+ADD index.html index.html
+ADD app.js src/js/app.js
+ADD style.scss src/scss/style.scss
+
+# build js and sass
+RUN npm run build
+
+# set workdir
+RUN mkdir /var/www/vuejs
+WORKDIR /var/www/vuejs
+
+# setup entrypoint
+ADD happ-entrypoint.sh /bin/happ-entrypoint.sh
+RUN chmod 777 /bin/happ-entrypoint.sh
+ENTRYPOINT ["sh", "/bin/happ-entrypoint.sh"]
