@@ -1,6 +1,6 @@
 #!/usr/bin/sh
-mv /var/www/happ-pre/* /var/www/happ/
-mv /var/www/happ-pre/.??* /var/www/happ/
-rmdir /var/www/happ-pre
-chown -R 1000:1000 /var/www/happ
-nginx -g 'daemon off;'
+sudo mv /var/www/happ-pre/* /var/www/happ/
+sudo mv /var/www/happ-pre/.??* /var/www/happ/
+sudo rmdir /var/www/happ-pre
+sudo chown -R 1000:1000 /var/www/happ
+sudo nginx -g 'daemon off;'

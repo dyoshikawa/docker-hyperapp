@@ -2,7 +2,11 @@ FROM node:alpine
 
 RUN apk --update add bash nginx
 
-RUN sed -i 's/user\ \ nginx\;/user\ \ 1000\;/g' /etc/nginx/nginx.conf \
+# install sudo and set dockeruser sudoer
+RUN apk add sudo \
+ && echo 'node ALL=(ALL:ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+RUN sed -i 's/user\ \ nginx\;/user\ \ node\;/g' /etc/nginx/nginx.conf \
  && mkdir /run/nginx
 ADD server.conf /etc/nginx/conf.d/default.conf
 
@@ -34,4 +38,5 @@ WORKDIR /var/www/happ
 # setup entrypoint
 ADD happ-entrypoint.sh /bin/happ-entrypoint.sh
 RUN chmod 777 /bin/happ-entrypoint.sh
+USER node
 ENTRYPOINT ["sh", "/bin/happ-entrypoint.sh"]
