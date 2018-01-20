@@ -14,23 +14,22 @@ RUN mkdir -p src/js \
  && mkdir src/scss \
  && mkdir dist
 
-RUN npm init -y \
- && npm install --save-dev webpack babel-cli babel-preset-env babel-loader node-sass \
- && npm install --save hyperapp bootstrap-sass
-
 ADD package.json package.json
 ADD .babelrc .babelrc
 ADD webpack.config.js webpack.config.js
 ADD index.html index.html
-ADD main.js src/js/main.js
+ADD main.jsx src/js/main.js
 ADD style.scss src/scss/style.scss
+
+RUN npm install --save-dev webpack babel-cli babel-preset-env babel-preset-react babel-loader node-sass \
+ && npm install --save hyperapp bootstrap-sass
 
 # build js and sass
 RUN npm run build
 
 # set workdir
-RUN mkdir /var/www/vuejs
-WORKDIR /var/www/vuejs
+RUN mkdir /var/www/happ
+WORKDIR /var/www/happ
 
 # setup entrypoint
 ADD happ-entrypoint.sh /bin/happ-entrypoint.sh

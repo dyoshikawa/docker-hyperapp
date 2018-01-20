@@ -8,13 +8,13 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'hyperapp$': ''
+      'hyperapp$': 'hyperapp/dist/hyperapp.js'
     }
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.js$|\.jsx$/,
         loader: 'babel-loader',
         exclude: /node_modules/
       }
