@@ -22,7 +22,7 @@ ADD package.json package.json
 ADD .babelrc .babelrc
 ADD webpack.config.js webpack.config.js
 ADD index.html index.html
-ADD app.js src/js/app.js
+ADD main.js src/js/main.js
 ADD style.scss src/scss/style.scss
 
 # build js and sass
