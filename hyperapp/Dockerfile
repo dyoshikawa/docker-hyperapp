@@ -22,7 +22,7 @@ ADD package.json package.json
 ADD .babelrc .babelrc
 ADD webpack.config.js webpack.config.js
 ADD index.html index.html
-ADD main.jsx src/js/main.js
+ADD main.js src/js/main.js
 ADD style.scss src/scss/style.scss
 
 RUN npm install --save-dev webpack babel-cli babel-preset-env babel-plugin-transform-react-jsx babel-loader node-sass \
