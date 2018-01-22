@@ -27,7 +27,7 @@ ADD package.json package.json
 ADD .babelrc .babelrc
 ADD webpack.config.js webpack.config.js
 ADD index.html index.html
-ADD main.js src/js/main.js
+ADD main.jsx src/js/main.jsx
 ADD style.scss src/scss/style.scss
 
 # install nodemodules
